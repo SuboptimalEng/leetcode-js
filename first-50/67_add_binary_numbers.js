@@ -18,6 +18,8 @@ Input: a = "1010", b = "1011"
 Output: "10101"
 */
 
+// time - O(a.length + b.length)
+// space - O(1) - only storing a few extra variables
 var addBinary = function (a, b) {
   let p1 = a.length - 1;
   let p2 = b.length - 1;

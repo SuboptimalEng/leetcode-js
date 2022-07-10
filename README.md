@@ -1,4 +1,4 @@
-# 📚 LeetCode in JavaScript
+# 🚀 LeetCode in JavaScript
 
 Solutions to popular LeetCode questions in JavaScript.
 

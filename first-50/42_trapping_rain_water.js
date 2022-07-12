@@ -23,6 +23,47 @@ Input: height = [4,2,0,3,2,5]
 Output: 9
 */
 
+var trap = function (heights) {
+  // keep track of maximum values seen on left/right sides of array
+  let maxLeft = 0;
+  let maxRight = 0;
+
+  let res = 0;
+  let leftIndex = 0;
+  let rightIndex = heights.length - 1;
+
+  while (true) {
+    if (leftIndex === rightIndex) {
+      break;
+    }
+
+    let leftValue = heights[leftIndex];
+    let rightValue = heights[rightIndex];
+
+    if (leftValue < rightValue) {
+      let sum = maxLeft - leftValue;
+      if (sum < 0) {
+        // if sum is less than zero, then we need to update the left max
+        maxLeft = leftValue;
+        sum = 0;
+      }
+      res += sum;
+      leftIndex++;
+    } else {
+      let sum = maxRight - rightValue;
+      if (sum < 0) {
+        // if sum is less than zero, then we need to update the right max
+        maxRight = rightValue;
+        sum = 0;
+      }
+      res += sum;
+      rightIndex--;
+    }
+  }
+
+  return res;
+};
+
 // time - O(n) - 3 pass algorithm for creating 2 arrays
 // space - O(n) - keep track of max left/right arrays
 var trap = function (heights) {

@@ -61,8 +61,12 @@ var trap = function (heights) {
     }
   }
 
+  console.log(res);
   return res;
 };
+
+let heights = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+trap(heights);
 
 // time - O(n) - 3 pass algorithm for creating 2 arrays
 // space - O(n) - keep track of max left/right arrays
@@ -99,6 +103,3 @@ var trap = function (heights) {
   console.log(res);
   return res;
 };
-
-let heights = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
-trap(heights);

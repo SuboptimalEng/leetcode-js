@@ -17,6 +17,32 @@ Example 2:
 Input: nums = [0,1]
 Output: [[0,1],[1,0]]
 */
+// keep track of visited indices in an array
+var permutations2 = function (nums) {
+  let res = [];
+  let helper = (res, nums, curr, visited) => {
+    if (curr.length === nums.length) {
+      res.push([...curr]);
+      return;
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+      if (visited.includes(i)) {
+        continue;
+      }
+      curr.push(nums[i]);
+      visited.push(i);
+      helper(res, nums, curr, visited);
+      visited.pop();
+      curr.pop();
+    }
+  };
+  helper(res, nums, [], []);
+  return res;
+};
+
+let example4 = permutations2([1, 2, 3]);
+console.log(example4);
 
 var permutations = function (nums) {
   let helper = (res, nums, curr) => {
@@ -43,4 +69,4 @@ let example2 = permutations([0, 1]);
 // console.log(example2);
 
 let example3 = permutations([1, 1, 2]);
-console.log(example3);
+// console.log(example3);

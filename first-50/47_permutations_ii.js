@@ -24,6 +24,29 @@ Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 
 */
 
+// fast without hashmap
+let permute = (nums) => {
+  let res = [];
+  nums.sort((a, b) => a - b);
+  let helper = (res, nums, curr) => {
+    if (nums.length === 0) {
+      res.push([...curr]);
+      return;
+    }
+    for (let i = 0; i < nums.length; i++) {
+      if (i > 0 && nums[i] === nums[i - 1]) {
+        continue;
+      }
+      curr.push(nums[i]);
+      let numsWithoutCurrentIndex = nums.filter((num, index) => index !== i);
+      helper(res, numsWithoutCurrentIndex, curr);
+      curr.pop();
+    }
+  };
+  helper(res, nums, []);
+  return res;
+};
+
 // var permuteUnique = function (nums) {
 //   let m = {};
 //   for (let i = 0; i < nums.length; i++) {

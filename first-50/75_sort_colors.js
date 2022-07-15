@@ -22,6 +22,42 @@ Input: nums = [2,0,2,1,1,0]
 Output: [0,0,1,1,2,2]
 */
 
+// time - O(n) - one-pass solution
+// space - O(1)
+var sortColors2 = function (nums) {
+  console.log(nums);
+  let i = 0;
+  let left = 0;
+  let maxLen = nums.length - 1;
+  let right = maxLen;
+
+  while (true) {
+    // if i greater than right, then we don't need to do more checks
+    if (i > right) {
+      break;
+    }
+    if (nums[i] === 0) {
+      let tmp = nums[i];
+      nums[i] = nums[left];
+      nums[left] = tmp;
+      left++;
+      i++;
+    } else if (nums[i] === 2) {
+      let tmp = nums[i];
+      nums[i] = nums[right];
+      nums[right] = tmp;
+      right--;
+    } else {
+      i++;
+    }
+  }
+
+  console.log(nums);
+  return nums;
+};
+
+// time - O(n) - two-pass solution
+// space - O(1)
 var sortColors = function (nums) {
   console.log(nums);
   let zeros = 0;
@@ -55,4 +91,5 @@ var sortColors = function (nums) {
 };
 
 let nums = [2, 0, 2, 1, 1, 0];
-sortColors(nums);
+// sortColors(nums);
+sortColors2(nums);

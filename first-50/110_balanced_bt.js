@@ -19,40 +19,32 @@ Output: true
 
 // TODO: Redo this one?
 var isBalanced = function (root) {
-  let helper = (root) => {
+  let check = (root) => {
     if (root === null) {
       return 0;
     }
-    let left = helper(root.left);
-    let right = helper(root.right);
-    let diff = Math.abs(left - right);
-    if (left === -1 || right === -1 || diff > 1) {
+    let left = check(root.left);
+    let right = check(root.right);
+    let difference = Math.abs(left - right);
+    if (difference > 1 || left === -1 || right === -1) {
       return -1;
     }
     return 1 + Math.max(left, right);
   };
+  return check(root) !== -1;
 
-  return helper(root) === -1 ? false : true;
+  // this works as well
+  // let helper = (root) => {
+  //   if (root === null) {
+  //     return 0;
+  //   }
+  //   let left = helper(root.left);
+  //   let right = helper(root.right);
+  //   let diff = Math.abs(left - right);
+  //   if (left === -1 || right === -1 || diff > 1) {
+  //     return -1;
+  //   }
+  //   return 1 + Math.max(left, right);
+  // };
+  // return helper(root) === -1 ? false : true;
 };
-
-// let depth = (root) => {
-//   if (root === null) {
-//     return 0;
-//   }
-//   let left = 1 + depth(root.left);
-//   let right = 1 + depth(root.right);
-//   return Math.max(left, right);
-// };
-
-// var isBalanced = function (root) {
-//   if (root === null) return true;
-
-//   let maxLeft = depth(root.left);
-//   let maxRight = depth(root.right);
-
-//   return (
-//     Math.abs(maxLeft - maxRight) < 2 &&
-//     isBalanced(root.left) &&
-//     isBalanced(root.right)
-//   );
-// };

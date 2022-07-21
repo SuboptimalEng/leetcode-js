@@ -29,6 +29,24 @@ level order as connected by the next pointers, with '#' signifying
 the end of each level.
 */
 
+// key insight here is that root.next is connected
+// time - O(n) - recursive solution
+// space - O(1) - dfs stack doesn't count here!!!
+var connect = function (root) {
+  if (root === null) {
+    return root;
+  }
+  if (root.left !== null) {
+    root.left.next = root.right;
+  }
+  if (root.next !== null && root.right !== null) {
+    root.right.next = root.next.left;
+  }
+  connect(root.left);
+  connect(root.right);
+  return root;
+};
+
 // time - O(n) - bfs solution
 // space - O(n) - queue length
 var connect = function (root) {

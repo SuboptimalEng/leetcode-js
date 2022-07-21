@@ -29,6 +29,55 @@ level order as connected by the next pointers, with '#' signifying
 the end of each level.
 */
 
+// time - O(n) - bfs iterative solution
+// space - O(1) - only using pointers!!!
+var connect = function (root) {
+  if (root === null) {
+    return root;
+  }
+  if (root.left === null && root.right === null) {
+    return root;
+  }
+
+  let prevHead = root;
+  let currHead = root.left;
+
+  let prev = prevHead;
+  let curr = currHead;
+
+  while (true) {
+    if (currHead === null) {
+      break;
+    } else {
+      prev = prevHead;
+      curr = currHead;
+    }
+
+    while (true) {
+      // child left -> right
+      curr.next = prev.right;
+      // move curr pointer right
+      curr = curr.next;
+
+      prev = prev.next;
+      if (prev === null) {
+        break;
+      }
+
+      // child right -> cousin left
+      curr.next = prev.left;
+      // move curr pointer right
+      curr = curr.next;
+    }
+
+    // move pointers to left heads down one level
+    prevHead = currHead;
+    currHead = currHead.left;
+  }
+
+  return root;
+};
+
 // key insight here is that root.next is connected
 // time - O(n) - recursive solution
 // space - O(1) - dfs stack doesn't count here!!!

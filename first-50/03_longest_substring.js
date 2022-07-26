@@ -17,6 +17,33 @@ Explanation: The answer is "abc", with the length of 3.
 // time - O(n)
 // space - O(n) - map of unique chars
 var lengthOfLongestSubstring = function (s) {
+  if (s.length < 2) {
+    return s.length;
+  }
+
+  let left = 0;
+  let longest = 0;
+  let m = new Set();
+
+  for (let right = 0; right < s.length; right++) {
+    let ch = s[right];
+
+    while (true) {
+      if (!m.has(ch)) {
+        break;
+      }
+      m.delete(s[left]);
+      left++;
+    }
+
+    m.add(ch);
+    longest = Math.max(longest, m.size);
+  }
+
+  return longest;
+};
+
+var lengthOfLongestSubstring = function (s) {
   let longest = 0;
   let m = new Map();
 

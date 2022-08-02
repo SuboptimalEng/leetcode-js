@@ -23,6 +23,41 @@ Input: height = [4,2,0,3,2,5]
 Output: 9
 */
 
+// time - O(n)
+// space - O(n)
+var trap = function (heights) {
+  let maxLefts = [];
+  let maxRights = [];
+
+  let maxLeft = 0;
+  let maxRight = 0;
+
+  for (let i = 0; i < heights.length; i++) {
+    if (heights[i] > maxLeft) {
+      maxLeft = heights[i];
+    }
+    maxLefts.push(maxLeft);
+  }
+
+  for (let i = heights.length - 1; i >= 0; i--) {
+    if (heights[i] > maxRight) {
+      maxRight = heights[i];
+    }
+    maxRights.unshift(maxRight);
+  }
+
+  // console.log(maxLefts);
+  // console.log(maxRights);
+
+  let res = 0;
+  for (let i = 0; i < heights.length; i++) {
+    let currMax = Math.min(maxLefts[i], maxRights[i]);
+    res += Math.max(0, currMax - heights[i]);
+  }
+
+  return res;
+};
+
 var trap = function (heights) {
   // keep track of maximum values seen on left/right sides of array
   let maxLeft = 0;

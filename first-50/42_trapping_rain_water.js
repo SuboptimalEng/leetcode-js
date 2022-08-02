@@ -23,6 +23,42 @@ Input: height = [4,2,0,3,2,5]
 Output: 9
 */
 
+var trap = function (heights) {
+  if (heights.length < 2) {
+    return 0;
+  }
+
+  let res = 0;
+  let left = 0;
+  let right = heights.length - 1;
+  let maxLeft = heights[left];
+  let maxRight = heights[right];
+
+  while (true) {
+    if (left >= right) {
+      break;
+    }
+
+    if (maxLeft <= maxRight) {
+      left++;
+      let curr = heights[left];
+      res += Math.max(maxLeft - curr, 0);
+      if (curr > maxLeft) {
+        maxLeft = curr;
+      }
+    } else {
+      right--;
+      let curr = heights[right];
+      res += Math.max(maxRight - curr, 0);
+      if (curr > maxRight) {
+        maxRight = curr;
+      }
+    }
+  }
+
+  return res;
+};
+
 // time - O(n)
 // space - O(n)
 var trap = function (heights) {
